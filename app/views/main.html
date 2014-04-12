@@ -20,15 +20,18 @@
 
         <br />
 
-        <button class="btn btn-primary col-md-12"
+        <button class="btn btn-primary btn-block"
                 ng-show="!new_project_show"
                 ng-click="new_project_show = !new_project_show">New Project</button>
 
-        <div ng-show="new_project_show">
-            <input type="text" ng-model="new_project_title" class="col-md-12">
-            <br /><br />
-            <button class="btn btn-primary col-md-12" ng-click="add_project()">Add</button>
-        </div>
+        <form ng-show="new_project_show" class="">
+            <div class="form-group">
+                <input type="text" ng-model="new_project.title" class="form-control">
+                <br />
+                <textarea class="form-control" ng-model="new_project.description"></textarea>
+            </div>
+            <button class="btn btn-primary btn-block" ng-click="add_project()">Add</button>
+        </form>
 
     </div>
 

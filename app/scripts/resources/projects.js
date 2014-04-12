@@ -7,13 +7,9 @@ angular.module('gtdTreeApp')
 
         var projects_key = 'projects';
 
-        function create_project(project_title) {
-            var new_project_id = this.get_last_project_id() + 1;
-            this.projects.push({
-                id: new_project_id,
-                title: project_title
-            });
-
+        function create_project(new_project) {
+            new_project.id = this.get_last_project_id() + 1;
+            this.projects.push(new_project);
             this.save();
         }
 
