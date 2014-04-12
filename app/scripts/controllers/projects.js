@@ -11,6 +11,10 @@ angular.module('gtdTreeApp')
 
             $scope.new_project_title = '';
             $scope.new_project_show = false;
-        }
+        };
+
+        $scope.remove_project = function(project_id) {
+            Projects.remove(project_id);
+        };
 
     });

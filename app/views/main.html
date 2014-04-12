@@ -4,8 +4,17 @@
         <h3>Projects</h3>
 
         <ul class="nav nav-pills nav-stacked">
-            <li ng-repeat="project in projects">
-                <a href="#">{{ project.title }}</a>
+            <li ng-repeat="project in projects"
+                ng-mouseenter="show_delete_icon = true"
+                ng-mouseleave="show_delete_icon = false">
+                <a href="#">
+                    {{ project.title }}
+                    <span class="btn btn-danger pull-right btn-xs"
+                            ng-click="remove_project(project.id)"
+                            ng-show="show_delete_icon">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </span>
+                </a>
             </li>
         </ul>
 

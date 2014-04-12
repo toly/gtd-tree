@@ -5,8 +5,6 @@
 angular.module('gtdTreeApp')
     .factory('Projects', function($rootScope, localStorageService){
 
-        console.log(localStorageService);
-
         var projects_key = 'projects';
 
         function create_project(project_title) {
@@ -21,7 +19,8 @@ angular.module('gtdTreeApp')
 
         function get_last_project_id() {
             var max_id = 0;
-            for (var project in this.projects) {
+            for (var project_num in this.projects) {
+                var project = this.projects[project_num];
                 if (project.id > max_id) {
                     max_id = project.id;
                 }
@@ -34,10 +33,18 @@ angular.module('gtdTreeApp')
             $rootScope[projects_key] = this.projects;
         }
 
+        function remove_project(project_id) {
+            this.projects = this.projects.filter(function(project){
+                return project.id != project_id;
+            });
+            this.save();
+        }
+
         return {
             projects: localStorageService.get(projects_key) || [],
             get_last_project_id: get_last_project_id,
             create: create_project,
+            remove: remove_project,
             save: save
         };
 
