@@ -7,7 +7,7 @@
             <li ng-repeat="project in projects"
                 ng-mouseenter="show_delete_icon = true"
                 ng-mouseleave="show_delete_icon = false">
-                <a href="#">
+                <a href="#" ng-click="select_project(project.id)">
                     {{ project.title }}
                     <span class="btn btn-danger pull-right btn-xs"
                             ng-click="remove_project(project.id)"
@@ -33,6 +33,11 @@
             <button class="btn btn-primary btn-block" ng-click="add_project()">Add</button>
         </form>
 
+    </div>
+
+    <div class="col-md-5">
+        <h3>{{ current_project.title }}</h3>
+        <p>{{ current_project.description }}</p>
     </div>
 
 </div>

@@ -36,12 +36,21 @@ angular.module('gtdTreeApp')
             this.save();
         }
 
+        function get_project(project_id) {
+            for (var project_num in this.projects) {
+                if (this.projects[project_num].id == project_id) {
+                    return this.projects[project_num];
+                }
+            }
+        }
+
         return {
             projects: localStorageService.get(projects_key) || [],
             get_last_project_id: get_last_project_id,
             create: create_project,
             remove: remove_project,
-            save: save
+            save: save,
+            get_project: get_project
         };
 
     });
