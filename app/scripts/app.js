@@ -4,7 +4,8 @@ angular.module('gtdTreeApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngRoute'
+    'ngRoute',
+    'LocalStorageModule'
 ])
     .config(function ($routeProvider) {
         $routeProvider
@@ -15,12 +16,9 @@ angular.module('gtdTreeApp', [
             .otherwise({
                 redirectTo: '/'
             });
-    }).run(function ($rootScope) {
+    }).run(function ($rootScope, Projects) {
 
-        $rootScope.projects = [{
-            id: 1,
-            title: 'title project',
-            description: 'desc'
-        }];
+        // load projects form local storage
+        $rootScope.projects = Projects.projects;
 
     });

@@ -3,13 +3,11 @@
  */
 
 angular.module('gtdTreeApp')
-    .controller('ProjectsCtrl', function($scope, $rootScope){
+    .controller('ProjectsCtrl', function($scope, $rootScope, Projects){
 
         $scope.add_project = function(){
 
-            $rootScope.projects.push({
-                title: $scope.new_project_title
-            });
+            Projects.create($scope.new_project_title);
 
             $scope.new_project_title = '';
             $scope.new_project_show = false;
