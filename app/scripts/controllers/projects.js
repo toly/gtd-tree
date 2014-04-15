@@ -5,6 +5,8 @@
 angular.module('gtdTreeApp')
     .controller('ProjectsCtrl', function($scope, $rootScope, Projects){
 
+        // projects operations
+
         $scope.new_project = {};
 
         $scope.add_project = function(){
@@ -23,5 +25,7 @@ angular.module('gtdTreeApp')
         $scope.select_project = function(project_id) {
             $rootScope.current_project = Projects.get_project(project_id);
         };
+
+        // tree operations
 
     });

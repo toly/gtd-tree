@@ -16,9 +16,9 @@ angular.module('gtdTreeApp', [
             .otherwise({
                 redirectTo: '/'
             });
-    }).run(function ($rootScope, Projects) {
+    }).run(function ($rootScope, localStorageService, Projects) {
 
         // load projects form local storage
         $rootScope.projects = Projects.projects;
-
+        $rootScope.current_project = {};
     });
