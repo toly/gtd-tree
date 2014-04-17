@@ -6,6 +6,7 @@ angular.module('gtdTreeApp')
     .controller('TreeCtrl', function($scope, $rootScope, Trees){
 
         $scope.nodes = [];
+        $scope.focus_id = null;
 
         $scope.get_new_id = function(){
             var max_id = 0;
@@ -25,6 +26,8 @@ angular.module('gtdTreeApp')
 
         $scope.add_child = function(parent_id){
             var new_id = $scope.get_new_id();
+            $scope.focus_id = new_id;
+
             $scope.nodes.push({
                 id: new_id,
                 parent: parent_id,

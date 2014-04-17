@@ -47,10 +47,11 @@
 <script type="text/ng-template"  id="tree_item_renderer.html">
 
     <span ng-hide="node.edit || node.id == null">{{ node.id }}) {{node.name}}</span>
-    <input type="text" ng-model="node.name" ng-show="node.edit" ng-focus="true">
+    <input type="text" ng-model="node.name" ng-show="node.edit" ng-if="node.id != focus_id">
+    <input type="text" ng-model="node.name" ng-show="node.edit" ng-if="node.id == focus_id" autofocus>
 
     <button ng-show="node.edit" ng-click="node.edit = false; save_project()">save</button>
-    <button ng-click="node.edit = true" ng-show="node.id != null && !node.edit">edit</button>
+    <button ng-click="node.edit = true; focus_id = node.id" ng-show="node.id != null && !node.edit">edit</button>
     <button ng-click="delete_childs(node.id)">delete childs</button>
 
     <button ng-click="add_child(node.id)">Add</button>
