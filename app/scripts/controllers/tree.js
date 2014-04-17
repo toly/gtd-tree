@@ -60,6 +60,14 @@ angular.module('gtdTreeApp')
             $scope.save_project();
         };
 
+        $scope.delete_node = function(delete_node_id){
+            $scope.delete_childs(delete_node_id);
+            $scope.nodes = $scope.nodes.filter(function(node){
+                return node.id != delete_node_id;
+            });
+            $scope.save_project();
+        };
+
         $scope.press = function(event, node){
            if (event.keyCode == 13){
                node.edit = false;
