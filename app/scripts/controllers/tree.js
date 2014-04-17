@@ -58,6 +58,13 @@ angular.module('gtdTreeApp')
             $scope.save_project();
         };
 
+        $scope.press = function(event, node){
+           if (event.keyCode == 13){
+               node.edit = false;
+               $scope.save_project();
+           }
+        };
+
         $rootScope.$watch('current_project', function(){
             $scope.nodes = Trees.get_project_tree($rootScope.current_project.id);
         });
