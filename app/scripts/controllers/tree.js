@@ -5,7 +5,6 @@
 angular.module('gtdTreeApp')
     .controller('TreeCtrl', function($scope, $rootScope, Trees){
 
-
         $scope.nodes = [];
 
         $scope.get_new_id = function(){
@@ -29,8 +28,31 @@ angular.module('gtdTreeApp')
             $scope.nodes.push({
                 id: new_id,
                 parent: parent_id,
-                name: 'node ' + new_id
+                name: 'node ' + new_id,
+                edit: true
             });
+        };
+
+        $scope.delete_childs = function(delete_node_id){
+            var ids_for_delete = [],
+                ids_scope = [delete_node_id],
+                node_id;
+
+            while (ids_scope.length > 0) {
+                node_id = ids_scope.shift();
+                var childs = $scope.get_childs(node_id);
+                for (var node_num in childs){
+                    var current_node_id = childs[node_num].id;
+                    ids_scope.push(current_node_id);
+                    ids_for_delete.push(current_node_id);
+                }
+            }
+
+            $scope.nodes = $scope.nodes.filter(function(node){
+                return ids_for_delete.indexOf(node.id) == -1;
+            });
+
+            $scope.save_project();
         };
 
         $rootScope.$watch('current_project', function(){

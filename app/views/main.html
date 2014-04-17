@@ -47,9 +47,17 @@
 </div>
 
 <script type="text/ng-template"  id="tree_item_renderer.html">
-    {{node.name}}
 
-            <button ng-click="add_child(node.id)">Add</button>
+    <span ng-hide="node.edit">{{ node.id }}) {{node.name}}</span>
+    <input type="text" ng-model="node.name" ng-show="node.edit">
+
+    <button ng-show="node.edit" ng-click="node.edit = false; save_project()">save</button>
+    <button ng-click="node.edit = true">edit</button>
+    <button ng-click="delete_childs(node.id)">delete childs</button>
+
+    <button ng-click="add_child(node.id)">Add</button>
+
+
     <ul>
         <li ng-repeat="node in get_childs(node.id)" ng-include="'tree_item_renderer.html'"></li>
     </ul>
