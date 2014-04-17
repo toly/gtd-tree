@@ -16,9 +16,6 @@ angular.module('gtdTreeApp')
 
         function save_project_tree(project_id, tree_data){
             this.trees[project_id] = tree_data;
-
-            console.log(this.trees);
-
             localStorageService.add(trees_key, this.trees);
         }
 

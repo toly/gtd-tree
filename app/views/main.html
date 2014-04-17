@@ -35,27 +35,22 @@
 
     </div>
 
-    <div class="col-md-9" ng-controller="TreeCtrl" ng-show="current_project.title">
+    <div class="col-md-9" ng-controller="TreeCtrl" ng-show="current_project.title" ng-init="node = {id: null}">
         <h3>{{ current_project.title }}</h3>
         <p>{{ current_project.description }}</p>
         <button class="btn btn-primary" ng-click="save_project()">Save</button>
 
-        <ul>
-            <li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
-        </ul>
+        <div ng-include="'tree_item_renderer.html'"></div>
 
     </div>
 
 </div>
 
 <script type="text/ng-template"  id="tree_item_renderer.html">
+    {{node.name}}
 
-    {{data.name}}
-    <input type="text" ng-model="data.name" />
-
-    <button ng-click="add(data)">Add node</button>
-    <button ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete nodes</button>
+            <button ng-click="add_child(node.id)">Add</button>
     <ul>
-        <li ng-repeat="data in data.nodes" ng-include="'tree_item_renderer.html'"></li>
+        <li ng-repeat="node in get_childs(node.id)" ng-include="'tree_item_renderer.html'"></li>
     </ul>
 </script>
