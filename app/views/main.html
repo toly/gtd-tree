@@ -38,21 +38,19 @@
     <div class="col-md-9" ng-controller="TreeCtrl" ng-show="current_project.title" ng-init="node = {id: null}">
         <h3>{{ current_project.title }}</h3>
         <p>{{ current_project.description }}</p>
-        <button class="btn btn-primary" ng-click="save_project()">Save</button>
 
         <div ng-include="'tree_item_renderer.html'"></div>
-
     </div>
 
 </div>
 
 <script type="text/ng-template"  id="tree_item_renderer.html">
 
-    <span ng-hide="node.edit">{{ node.id }}) {{node.name}}</span>
-    <input type="text" ng-model="node.name" ng-show="node.edit">
+    <span ng-hide="node.edit || node.id == null">{{ node.id }}) {{node.name}}</span>
+    <input type="text" ng-model="node.name" ng-show="node.edit" ng-focus="true">
 
     <button ng-show="node.edit" ng-click="node.edit = false; save_project()">save</button>
-    <button ng-click="node.edit = true">edit</button>
+    <button ng-click="node.edit = true" ng-show="node.id != null && !node.edit">edit</button>
     <button ng-click="delete_childs(node.id)">delete childs</button>
 
     <button ng-click="add_child(node.id)">Add</button>

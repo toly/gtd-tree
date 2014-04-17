@@ -28,7 +28,7 @@ angular.module('gtdTreeApp')
             $scope.nodes.push({
                 id: new_id,
                 parent: parent_id,
-                name: 'node ' + new_id,
+                name: '',
                 edit: true
             });
         };
