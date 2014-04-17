@@ -57,8 +57,8 @@
 
     <span ng-hide="node.edit || node.id == null">{{node.name}}</span>
 
-    <input type="text" ng-model="node.name" ng-show="node.edit" ng-if="node.id != focus_id">
-    <input type="text" ng-model="node.name" ng-show="node.edit" ng-if="node.id == focus_id" ng-keypress="press($event, node)" autofocus>
+    <input type="text" ng-model="node.name" ng-show="node.edit"
+           custom-autofocus="node.id == focus_id" ng-keypress="press($event, node)">
 
     <button ng-click="node.edit = true; focus_id = node.id" ng-show="node.id != null && !node.edit">
         <i class="glyphicon glyphicon-pencil"></i>
@@ -66,10 +66,6 @@
     <button ng-click="delete_childs(node.id)">
         <i class="glyphicon glyphicon-remove"></i>
     </button>
-
-
-
-
 
     <ul ng-hide="hide_childs">
         <li ng-repeat="node in get_childs(node.id)" ng-include="'tree_item_renderer.html'"></li>

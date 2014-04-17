@@ -26,7 +26,7 @@ angular.module('gtdTreeApp')
 
         $scope.add_child = function(parent_id){
             var new_id = $scope.get_new_id();
-            $scope.focus_id = new_id;
+
 
             $scope.nodes.push({
                 id: new_id,
@@ -34,6 +34,8 @@ angular.module('gtdTreeApp')
                 name: '',
                 edit: true
             });
+
+            $scope.focus_id = new_id;
         };
 
         $scope.delete_childs = function(delete_node_id){
@@ -61,6 +63,7 @@ angular.module('gtdTreeApp')
         $scope.press = function(event, node){
            if (event.keyCode == 13){
                node.edit = false;
+               $scope.focus_id = null;
                $scope.save_project();
            }
         };
