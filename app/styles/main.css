@@ -81,3 +81,17 @@ body {
 ul {
     list-style-type: none;
 }
+
+.node_element {
+    /*background-color: white;*/
+    padding: 10px 5px;
+    /*margin: 10px 5px;*/
+}
+
+.node_element:hover {
+    background-color: wheat;
+}
+
+.childs {
+    padding: 5px 15px;
+}
