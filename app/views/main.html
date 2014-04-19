@@ -56,7 +56,8 @@
 
         <button ng-click="add_child(node.id)"><i class="glyphicon glyphicon-plus"></i></button>
 
-        <span ng-hide="node.edit || node.id == null">
+        <span ng-hide="node.edit || node.id == null" ng-class="{done: node.done}">
+            <input type="checkbox" ng-model="node.done" ng-change="save_project()">
             {{node.name}}
         </span>
 
