@@ -7,6 +7,7 @@ angular.module('gtdTreeApp')
 
         $scope.nodes = [];
         $scope.focus_id = null;
+        $scope.indexes = {};
 
         $scope.get_new_id = function(){
             var max_id = 0;
@@ -94,6 +95,51 @@ angular.module('gtdTreeApp')
 
         $scope.save_project = function(){
             Trees.save_project_tree($rootScope.current_project.id, $scope.nodes);
+        };
+
+        function build_indexes(){
+            $scope.indexes = {};
+
+            function tree_walk(parent, nesting, indexes){
+                var childs = $scope.get_childs(parent);
+
+                for (var node_id in childs){
+                    var node = childs[node_id];
+                    var new_indexes = indexes.slice(0);
+                    new_indexes.push(parseInt(node_id) + 1);
+
+                    var index_str = new_indexes.join('.');
+                    if (index_str.length == 1) {
+                        index_str += '.';
+                    }
+
+                    $scope.indexes[node.id] = index_str;
+
+                    tree_walk(node.id, nesting + 1, new_indexes);
+                }
+            }
+
+            tree_walk(null, 0, []);
         }
+
+        $scope.make_pdf = function(){
+
+            $scope.is_pdf_rendering = true;
+
+            build_indexes()
+
+            var doc = new jsPDF('p','pt','a4');
+
+            for (var i=0; i < $scope.nodes.length; i++){
+                if ($scope.nodes[i].hover) {
+                    $scope.nodes[i].hover = false;
+                }
+            }
+
+            doc.addHTML(document.getElementById('project'), 10, 10, function(){
+                doc.output('dataurlnewwindow', {});
+                $scope.is_pdf_rendering = false;
+            });
+        };
 
     });

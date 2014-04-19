@@ -103,10 +103,14 @@ ul {
 }
 
 .childs {
-    padding: 5px 15px;
+    padding: 5px 20px;
 }
 
 .done {
     text-decoration: line-through;
     color: #808080;
+}
+
+.main_child {
+    padding-bottom: 5px;
 }
