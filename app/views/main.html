@@ -68,7 +68,7 @@
         <input type="text" class="" ng-model="node.name" ng-show="node.edit"
                custom-autofocus="node.id == focus_id" ng-keypress="press($event, node)">
 
-        <span ng-show="node.hover">
+        <span ng-show="node.hover" class="right-controls">
             <button ng-click="node.edit = true; focus_id = node.id"
                     ng-show="node.id != null && !node.edit"
                     class="btn btn-success btn-sm">

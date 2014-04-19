@@ -86,6 +86,18 @@ ul {
     padding: 10px 5px;
 }
 
+.node_element input[type=text] {
+    width: 50%;
+}
+
+.node_element input {
+    margin-left: 10px;
+}
+
+.right-controls {
+    margin-left: 10px;
+}
+
 .node_element:hover {
     background-color: wheat;
 }
