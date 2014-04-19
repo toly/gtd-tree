@@ -83,7 +83,7 @@ ul {
 }
 
 .node_element {
-    padding: 10px 5px;
+    padding: 2px 5px;
 }
 
 .node_element input[type=text] {
@@ -92,6 +92,7 @@ ul {
 
 .node_element input {
     margin-left: 10px;
+    margin-bottom: 3px;
 }
 
 .right-controls {
@@ -107,6 +108,3 @@ ul {
     color: #808080;
 }
 
-.main_child {
-    margin-bottom: 3px;
-}
