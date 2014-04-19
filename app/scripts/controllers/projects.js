@@ -3,7 +3,7 @@
  */
 
 angular.module('gtdTreeApp')
-    .controller('ProjectsCtrl', function($scope, $rootScope, Projects){
+    .controller('ProjectsCtrl', function($scope, $rootScope, Projects, Trees){
 
         // projects operations
 
@@ -20,6 +20,7 @@ angular.module('gtdTreeApp')
                 $rootScope.current_project = {};
             }
             Projects.remove(project_id);
+            Trees.remove_project_tree(project_id);
         };
 
         $scope.select_project = function(project_id) {
