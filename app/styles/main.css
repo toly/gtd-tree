@@ -99,11 +99,7 @@ ul {
 }
 
 .node_element:hover {
-    background-color: wheat;
-}
-
-.childs {
-    padding: 5px 20px;
+    background-color: #d3d3d3;
 }
 
 .done {
@@ -112,5 +108,5 @@ ul {
 }
 
 .main_child {
-    padding-bottom: 5px;
+    margin-bottom: 3px;
 }

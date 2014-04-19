@@ -81,7 +81,7 @@ angular.module('gtdTreeApp')
             };
         };
 
-        $scope.press = function(event, node){
+        $scope.key_press_node_input = function(event, node){
            if (event.keyCode == 13){
                node.edit = false;
                $scope.focus_id = null;

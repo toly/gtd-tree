@@ -66,53 +66,55 @@
 
 </div>
 
-<script type="text/ng-template"  id="tree_item_renderer.html" class="main_child">
+<script type="text/ng-template"  id="tree_item_renderer.html">
+    <div class="main_child">
+        <span class="node_element" ng-mouseenter="node.hover = true" ng-mouseleave="node.hover = false">
 
-    <span class="node_element" ng-mouseenter="node.hover = true" ng-mouseleave="node.hover = false">
+            <span ng-show="!is_pdf_rendering">
+                <button ng-click="hide_childs = true" ng-show="!hide_childs" class="btn btn-default"
+                        ng-class="{disabled: !get_childs(node.id).length}">
+                    <i class="glyphicon glyphicon-resize-small"></i>
+                </button>
+                <button ng-click="hide_childs = false" ng-show="hide_childs" class="btn btn-default">
+                    <i class="glyphicon glyphicon-resize-full"></i>
+                </button>
 
-        <span ng-show="!is_pdf_rendering">
-            <button ng-click="hide_childs = true" ng-show="!hide_childs" class="btn btn-default btn-sm"
-                    ng-class="{disabled: !get_childs(node.id).length}">
-                <i class="glyphicon glyphicon-expand"></i>
-            </button>
-            <button ng-click="hide_childs = false" ng-show="hide_childs" class="btn btn-default btn-sm">
-                <i class="glyphicon glyphicon-collapse-down"></i>
-            </button>
-
-            <button ng-click="add_child(node.id)" class="btn btn-primary btn-sm">
-                <i class="glyphicon glyphicon-plus"></i>
-            </button>
-        </span>
-
-        <span ng-hide="node.edit || node.id == null">
-
-            <input type="checkbox" ng-model="node.done" ng-change="save_project()" ng-show="!is_pdf_rendering">
-            <span ng-show="is_pdf_rendering">
-                <i class="glyphicon glyphicon-check" ng-show="node.done"></i>
-                <i class="glyphicon glyphicon-unchecked" ng-show="!node.done && node.id != null"></i>
+                <button ng-click="add_child(node.id)" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
             </span>
 
-            {{ indexes[node.id] }}
-            <span ng-class="{done: node.done}">{{node.name}}</span>
+            <span ng-hide="node.edit || node.id == null">
+
+                <input type="checkbox" ng-model="node.done" ng-change="save_project()" ng-show="!is_pdf_rendering">
+                <span ng-show="is_pdf_rendering">
+                    <i class="glyphicon glyphicon-check" ng-show="node.done"></i>
+                    <i class="glyphicon glyphicon-unchecked" ng-show="!node.done && node.id != null"></i>
+                </span>
+
+                {{ indexes[node.id] }}
+                <span ng-class="{done: node.done}">{{node.name}}</span>
+            </span>
+
+            <input type="text" class="" ng-model="node.name" ng-show="node.edit"
+                   custom-autofocus="node.id == focus_id" ng-keypress="key_press_node_input($event, node)">
+
+            <span ng-show="node.hover && node.id != null" class="right-controls">
+                <button ng-click="node.edit = true; focus_id = node.id"
+                        ng-show="!node.edit"
+                        class="btn btn-success btn-sm">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                </button>
+                <button ng-click="delete_node(node.id)"
+                        class="btn btn-danger btn-sm">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+            </span>
         </span>
+    </div>
 
-        <input type="text" class="" ng-model="node.name" ng-show="node.edit"
-               custom-autofocus="node.id == focus_id" ng-keypress="press($event, node)">
-
-        <span ng-show="node.hover && node.id != null" class="right-controls">
-            <button ng-click="node.edit = true; focus_id = node.id"
-                    ng-show="!node.edit"
-                    class="btn btn-success btn-sm">
-                <i class="glyphicon glyphicon-pencil"></i>
-            </button>
-            <button ng-click="delete_node(node.id)"
-                    class="btn btn-danger btn-sm">
-                <i class="glyphicon glyphicon-remove"></i>
-            </button>
-        </span>
-    </span>
-
-    <ul ng-hide="hide_childs" class="childs">
+    <ul ng-hide="hide_childs">
         <li ng-repeat="node in get_childs(node.id)" ng-include="'tree_item_renderer.html'"></li>
     </ul>
+
 </script>
