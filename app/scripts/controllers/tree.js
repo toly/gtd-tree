@@ -27,7 +27,6 @@ angular.module('gtdTreeApp')
         $scope.add_child = function(parent_id){
             var new_id = $scope.get_new_id();
 
-
             $scope.nodes.push({
                 id: new_id,
                 parent: parent_id,
@@ -66,6 +65,19 @@ angular.module('gtdTreeApp')
                 return node.id != delete_node_id;
             });
             $scope.save_project();
+        };
+
+        $scope.done_nodes = function(){
+            return $scope.nodes.filter(function(node){
+                return node.done;
+            });
+        };
+
+        $scope.get_progress = function(){
+            return {
+                total: $scope.nodes.length,
+                done: $scope.done_nodes().length
+            };
         };
 
         $scope.press = function(event, node){
