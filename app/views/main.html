@@ -70,11 +70,11 @@
     <div class="node_element" ng-mouseenter="node.hover = true" ng-mouseleave="node.hover = false">
 
             <span ng-show="!is_pdf_rendering">
-                <button ng-click="hide_childs = true" ng-show="!hide_childs" class="btn btn-default"
+                <button ng-click="hide_childs = true" ng-show="!hide_childs" class="btn btn-primary btn-sm"
                         ng-class="{disabled: !get_childs(node.id).length}">
                     <i class="glyphicon glyphicon-resize-small"></i>
                 </button>
-                <button ng-click="hide_childs = false" ng-show="hide_childs" class="btn btn-default">
+                <button ng-click="hide_childs = false" ng-show="hide_childs" class="btn btn-primary btn-sm">
                     <i class="glyphicon glyphicon-resize-full"></i>
                 </button>
 
