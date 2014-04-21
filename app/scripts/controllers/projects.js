@@ -16,6 +16,12 @@ angular.module('gtdTreeApp')
         };
 
         $scope.remove_project = function(project_id) {
+
+            var project = Projects.get_project(project_id);
+            var confirm_delete = confirm('Are you sure you want to delete a project "' + project.title +'"?');
+
+            if (!confirm_delete) return;
+
             if ($rootScope.current_project && $rootScope.current_project.id == project_id) {
                 $rootScope.current_project = {};
             }
