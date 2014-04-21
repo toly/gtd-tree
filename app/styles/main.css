@@ -108,3 +108,11 @@ ul {
     color: #808080;
 }
 
+.progress-column span {
+    position: absolute;
+    top: 0px;
+    z-index: 2;
+    color: #000000;
+    text-align: center;
+    width: 100%;
+}
