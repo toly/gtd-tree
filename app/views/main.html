@@ -3,17 +3,31 @@
     <div class="col-md-3" ng-controller="ProjectsCtrl">
         <h3>Projects</h3>
 
-        <ul class="nav nav-pills nav-stacked">
+        <ul class="nav nav-pills nav-stacked projects">
             <li ng-repeat="project in projects"
                 ng-mouseenter="show_delete_icon = true"
                 ng-mouseleave="show_delete_icon = false">
-                <a href="#" ng-click="select_project(project.id)">
-                    {{ project.title }}
-                    <span class="btn btn-danger pull-right btn-xs"
-                            ng-click="remove_project(project.id)"
-                            ng-show="show_delete_icon">
-                        <i class="glyphicon glyphicon-remove"></i>
+                <a ng-click="select_project(project.id)">
+                    <span ng-show="!project.edit">
+                        {{ project.title }}
                     </span>
+
+                    <input type="text" ng-show="project.edit"
+                           ng-model="project.title"
+                           ng-keypress="input_keypress($event, project)"
+                           custom-autofocus="project.edit == true">
+
+                    <span class="pull-right" ng-show="show_delete_icon">
+                        <button class="btn btn-success btn-xs"
+                                ng-click="project.edit=true">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </button>
+                        <button class="btn btn-danger btn-xs"
+                                ng-click="remove_project(project.id)">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                    </span>
+
                 </a>
             </li>
         </ul>

@@ -30,7 +30,22 @@ angular.module('gtdTreeApp')
         };
 
         $scope.select_project = function(project_id) {
+
+            for (var i = 0; i < Projects.projects.length; i++) {
+                if (Projects.projects[i].edit) {
+                    return;
+                }
+            }
+
             $rootScope.current_project = Projects.get_project(project_id);
+        };
+
+        $scope.input_keypress = function(event, project) {
+            if (event.keyCode == 13) {
+                project.edit = false;
+                Projects.update_project_title(project.id, project.title);
+            }
+
         };
 
         // tree operations

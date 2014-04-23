@@ -44,13 +44,33 @@ angular.module('gtdTreeApp')
             }
         }
 
+        function get_all_projects(){
+            var projects = localStorageService.get(projects_key) || [];
+
+            for (var i = 0; i < projects.length; i++) {
+                projects[i].edit = false;
+            }
+
+            return projects;
+        }
+
+        function update_project_title(project_id, title) {
+            for (var i = 0; i < this.projects.length; i++) {
+                if (this.projects[i].id == project_id) {
+                    this.projects[i].title = title;
+                }
+            }
+            this.save();
+        }
+
         return {
-            projects: localStorageService.get(projects_key) || [],
+            projects: get_all_projects(),
             get_last_project_id: get_last_project_id,
             create: create_project,
             remove: remove_project,
             save: save,
-            get_project: get_project
+            get_project: get_project,
+            update_project_title: update_project_title
         };
 
     });
