@@ -94,7 +94,6 @@ angular.module('gtdTreeApp')
         });
 
         $scope.save_project = function(){
-            console.log($scope.nodes);
             Trees.save_project_tree($rootScope.current_project.id, $scope.nodes);
         };
 
