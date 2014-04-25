@@ -82,7 +82,8 @@
 </div>
 
 <script type="text/ng-template"  id="tree_item_renderer.html">
-    <div class="node_element" ng-mouseenter="node.hover = true" ng-mouseleave="node.hover = false">
+    <div class="node_element" ng-mouseenter="node.hover = true" ng-mouseleave="node.hover = false"
+            ng-class="{cut_node: cut_node_id == node.id && cut_node_id != null}">
 
             <span ng-show="!is_pdf_rendering">
                 <button ng-click="hide_childs = true" ng-show="!hide_childs" class="btn btn-primary btn-sm"
@@ -95,6 +96,13 @@
 
                 <button ng-click="add_child(node.id)" class="btn btn-primary btn-sm" ng-if="node.id == null">
                     <i class="glyphicon glyphicon-plus"></i>
+                </button>
+
+                <button class="btn btn-warning btn-sm"
+                        ng-show="cut_node_id"
+                        ng-class="{disabled: cut_node_id == node.id}"
+                        ng-click="set_parent_node(node.id)">
+                    <i class="glyphicon glyphicon-log-in"></i>
                 </button>
             </span>
 
@@ -114,6 +122,11 @@
                    custom-autofocus="node.id == focus_id" ng-keypress="key_press_node_input($event, node)">
 
             <span ng-show="node.hover && node.id != null" class="right-controls">
+                <button class="btn btn-warning btn-sm"
+                        ng-click="set_cut_node_id(node.id)"
+                        ng-class="{disabled: cut_node_id && cut_node_id != node.id}">
+                    <i class="glyphicon glyphicon-log-out"></i>
+                </button>
                 <button ng-click="node.edit = true; focus_id = node.id"
                         ng-show="!node.edit"
                         class="btn btn-success btn-sm">

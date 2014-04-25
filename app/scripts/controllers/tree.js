@@ -8,6 +8,26 @@ angular.module('gtdTreeApp')
         $scope.nodes = [];
         $scope.focus_id = null;
         $scope.indexes = {};
+        $scope.cut_node_id = null;
+
+        $scope.set_cut_node_id = function(node_id) {
+            if ($scope.cut_node_id == node_id) {
+                $scope.cut_node_id = null;
+            } else {
+                $scope.cut_node_id = node_id;
+            }
+        };
+
+        $scope.set_parent_node = function(parent_node_id) {
+            for (var i = 0; i < $scope.nodes.length; i++) {
+                if ($scope.nodes[i].id == $scope.cut_node_id) {
+                    $scope.nodes[i].parent = parent_node_id;
+                    $scope.cut_node_id = null;
+                    $scope.save_project();
+                    return;
+                }
+            }
+        };
 
         $scope.get_new_id = function(){
             var max_id = 0;
