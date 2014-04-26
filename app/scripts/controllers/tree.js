@@ -138,6 +138,11 @@ angular.module('gtdTreeApp')
             $scope.save_project();
         };
 
+        $scope.node_edit = function(node) {
+            node.edit = true;
+            $scope.focus_id = node.id;
+        };
+
         function build_indexes(){
             $scope.indexes = {};
 
