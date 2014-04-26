@@ -84,6 +84,23 @@
                                 <i class="glyphicon glyphicon-resize-full"></i>
                             </button>
                         </div>
+
+
+                        <div class="btn-group">
+                            <button class="btn"
+                                    ng-class="{disabled: show_done_tasks}"
+                                    ng-click="show_done_tasks = true">
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                            </button>
+                            <span class="btn disabled">
+                                <i class="glyphicon glyphicon-check"></i>
+                            </span>
+                            <button class="btn"
+                                    ng-class="{disabled: !show_done_tasks}"
+                                    ng-click="show_done_tasks = false">
+                                <i class="glyphicon glyphicon-eye-close"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -97,8 +114,11 @@
 </div>
 
 <script type="text/ng-template"  id="tree_item_renderer.html">
-    <div class="node_element" ng-mouseenter="node.hover = true" ng-mouseleave="node.hover = false"
-            ng-class="{cut_node: cut_node_id == node.id && cut_node_id != null}">
+    <div class="node_element"
+         ng-mouseenter="node.hover = true"
+         ng-mouseleave="node.hover = false"
+         ng-class="{cut_node: cut_node_id == node.id && cut_node_id != null}"
+         ng-hide="!show_done_tasks && node.done">
 
             <span ng-show="!is_pdf_rendering">
                 <button ng-click="node.hide_childs = true" ng-show="!node.hide_childs" class="btn btn-primary btn-sm"

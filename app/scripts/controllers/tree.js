@@ -9,6 +9,7 @@ angular.module('gtdTreeApp')
         $scope.focus_id = null;
         $scope.indexes = {};
         $scope.cut_node_id = null;
+        $scope.show_done_tasks = true;
 
         $scope.set_all_expand = function(bool_expand) {
             for (var i = 0; i < $scope.nodes.length; i++) {
