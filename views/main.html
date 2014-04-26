@@ -1,12 +1,17 @@
-<div class="row"><div class="col-md-3" ng-controller="ProjectsCtrl"><h3>Projects</h3><ul class="nav nav-pills nav-stacked projects"><li ng-repeat="project in projects" ng-mouseenter="show_delete_icon = true" ng-mouseleave="show_delete_icon = false"><a ng-click="select_project(project.id)"><span ng-show="!project.edit">{{ project.title }}</span><input type="text" ng-show="project.edit" ng-model="project.title" ng-keypress="input_keypress($event, project)" custom-autofocus="project.edit == true"><span class="pull-right" ng-show="show_delete_icon"><button class="btn btn-success btn-xs" ng-click="project.edit=true"><i class="glyphicon glyphicon-pencil"></i></button> <button class="btn btn-danger btn-xs" ng-click="remove_project(project.id)"><i class="glyphicon glyphicon-remove"></i></button></span></a></li></ul><br><button class="btn btn-primary btn-block" ng-show="!new_project_show" ng-click="new_project_show = !new_project_show">New Project</button><form ng-show="new_project_show" class=""><div class="form-group"><input type="text" ng-model="new_project.title" class="form-control"><br><textarea class="form-control" ng-model="new_project.description"></textarea></div><button class="btn btn-primary btn-block" ng-click="add_project()">Add</button></form></div><div class="col-md-9" ng-controller="TreeCtrl" ng-show="current_project.title" ng-init="node = {id: null}"><div class="row"><h3 class="col-md-6">{{ current_project.title }} <button class="btn btn-primary btn-sm pull-right" ng-click="make_pdf()"><i class="glyphicon glyphicon-download-alt"></i>&nbsp; to PDF</button></h3></div><div id="project" style="background-color: #FFFFFF"><p>{{ current_project.description }}</p><div class="row"><div class="col-md-6 progress-column"><div class="progress"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{width: 100 * get_progress().done / get_progress().total + '%'}"></div></div><span>{{ get_progress().done }} / {{ get_progress().total }}</span></div></div><div ng-include="'tree_item_renderer.html'"></div></div></div></div><script type="text/ng-template" id="tree_item_renderer.html"><div class="node_element" ng-mouseenter="node.hover = true" ng-mouseleave="node.hover = false"
-            ng-class="{cut_node: cut_node_id == node.id && cut_node_id != null}">
+<div class="row"><div class="col-md-3" ng-controller="ProjectsCtrl"><h3>Projects</h3><ul class="nav nav-pills nav-stacked projects"><li ng-repeat="project in projects" ng-mouseenter="show_delete_icon = true" ng-mouseleave="show_delete_icon = false"><a ng-click="select_project(project.id)"><span ng-show="!project.edit">{{ project.title }}</span><input type="text" ng-show="project.edit" ng-model="project.title" ng-keypress="input_keypress($event, project)" custom-autofocus="project.edit == true" ng-blur="blur_edit_input(project)"><span class="pull-right" ng-show="show_delete_icon"><button class="btn btn-success btn-xs" ng-click="project.edit=true"><i class="glyphicon glyphicon-pencil"></i></button> <button class="btn btn-danger btn-xs" ng-click="remove_project(project.id)"><i class="glyphicon glyphicon-remove"></i></button></span></a></li></ul><br><button class="btn btn-primary btn-block" ng-show="!new_project_show" ng-click="new_project_show = !new_project_show">New Project</button><form ng-show="new_project_show" class=""><div class="form-group"><input type="text" ng-model="new_project.title" class="form-control" placeholder="Project title"><br><textarea class="form-control" ng-model="new_project.description" placeholder="Project description"></textarea></div><button class="btn btn-primary btn-block" ng-click="add_project()">Add</button></form></div><div class="col-md-9 text-center" ng-hide="current_project.title"><h1>Track your complex projects</h1><br><br><img src="images/ba35bb18.gtd_demo.png" width="300px" class="img-thumbnail"></div><div class="col-md-9" ng-controller="TreeCtrl" ng-show="current_project.title" ng-init="node = {id: null}" id="project" style="background-color: #FFFFFF"><div class="row"><h3 class="col-md-6">{{ current_project.title }}</h3></div><div><p>{{ current_project.description }}</p><!-- controls panel --><div class="row" ng-hide="is_pdf_rendering"><div class="col-md-6"><div class="btn-group"><button class="btn" ng-click="set_all_expand(true)"><i class="glyphicon glyphicon-resize-small"></i></button> <button class="btn" ng-click="set_all_expand(false)"><i class="glyphicon glyphicon-resize-full"></i></button></div><div class="btn-group"><button class="btn" ng-class="{disabled: show_done_tasks}" ng-click="show_done_tasks = true"><i class="glyphicon glyphicon-eye-open"></i></button> <span class="btn disabled"><i class="glyphicon glyphicon-check"></i></span> <button class="btn" ng-class="{disabled: !show_done_tasks}" ng-click="show_done_tasks = false"><i class="glyphicon glyphicon-eye-close"></i></button></div><div class="btn-group"><span class="btn disabled"><i class="glyphicon glyphicon-check"></i></span> <button class="btn" ng-click="remove_done_tasks()"><i class="glyphicon glyphicon-trash"></i></button></div><button class="btn btn-primary pull-right" ng-click="make_pdf()"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;PDF</button></div></div><hr><div class="row"><div class="col-md-6 progress-column"><div class="progress"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{width: 100 * get_progress().done / get_progress().total + '%'}"></div></div><span>{{ get_progress().done }} / {{ get_progress().total }}</span></div></div><div ng-include="'tree_item_renderer.html'" style="padding-bottom: 200px"></div></div></div></div><script type="text/ng-template" id="tree_item_renderer.html"><div class="node_element"
+         ng-mouseenter="node.hover = true"
+         ng-mouseleave="node.hover = false"
+         ng-class="{cut_node: cut_node_id == node.id && cut_node_id != null}"
+         ng-hide="!show_done_tasks && node.done">
 
             <span ng-show="!is_pdf_rendering">
-                <button ng-click="hide_childs = true" ng-show="!hide_childs" class="btn btn-primary btn-sm"
-                        ng-class="{disabled: !get_childs(node.id).length}">
+                <button ng-click="node.hide_childs = true" ng-show="!node.hide_childs" class="btn btn-primary btn-sm"
+                        ng-class="{disabled: !get_childs(node.id).length || node.id == null}">
                     <i class="glyphicon glyphicon-resize-small"></i>
                 </button>
-                <button ng-click="hide_childs = false" ng-show="hide_childs" class="btn btn-primary btn-sm">
+                <button ng-click="node.hide_childs = false"
+                        ng-show="node.hide_childs"
+                        class="btn btn-primary btn-sm">
                     <i class="glyphicon glyphicon-resize-full"></i>
                 </button>
 
@@ -35,7 +40,8 @@
             </span>
 
             <input type="text" class="" ng-model="node.name" ng-show="node.edit"
-                   custom-autofocus="node.id == focus_id" ng-keypress="key_press_node_input($event, node)">
+                   custom-autofocus="node.id == focus_id" ng-keypress="key_press_node_input($event, node)"
+                    ng-blur="node_input_unfocus(node)" placeholder="New task">
 
             <span ng-show="node.hover && node.id != null" class="right-controls">
                 <button class="btn btn-warning btn-sm"
@@ -43,7 +49,7 @@
                         ng-class="{disabled: cut_node_id && cut_node_id != node.id}">
                     <i class="glyphicon glyphicon-log-out"></i>
                 </button>
-                <button ng-click="node.edit = true; focus_id = node.id"
+                <button ng-click="node_edit(node)"
                         ng-show="!node.edit"
                         class="btn btn-success btn-sm">
                     <i class="glyphicon glyphicon-pencil"></i>
@@ -59,6 +65,6 @@
 
     </div>
 
-    <ul ng-hide="hide_childs">
+    <ul ng-hide="node.hide_childs">
         <li ng-repeat="node in get_childs(node.id)" ng-include="'tree_item_renderer.html'"></li>
     </ul></script>
