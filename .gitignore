@@ -6,3 +6,6 @@ app/bower_components
 
 # IDE folder
 .idea
+
+# Mac files
+.DS_Store
