@@ -18,6 +18,13 @@ angular.module('gtdTreeApp')
             }
         };
 
+        $scope.remove_done_tasks = function() {
+            $scope.nodes = $scope.nodes.filter(function(node){
+                return node.done != true;
+            });
+            $scope.save_project();
+        };
+
         $scope.set_cut_node_id = function(node_id) {
             if ($scope.cut_node_id == node_id) {
                 $scope.cut_node_id = null;
