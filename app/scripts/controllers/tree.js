@@ -10,6 +10,13 @@ angular.module('gtdTreeApp')
         $scope.indexes = {};
         $scope.cut_node_id = null;
 
+        $scope.set_all_expand = function(bool_expand) {
+            for (var i = 0; i < $scope.nodes.length; i++) {
+                if ($scope.nodes[i].id == null) continue;
+                $scope.nodes[i].hide_childs = bool_expand;
+            }
+        };
+
         $scope.set_cut_node_id = function(node_id) {
             if ($scope.cut_node_id == node_id) {
                 $scope.cut_node_id = null;
