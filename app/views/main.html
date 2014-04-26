@@ -52,6 +52,13 @@
 
     </div>
 
+    <div class="col-md-9 text-center" ng-hide="current_project.title">
+        <h1>Track your complex projects</h1>
+        <br />
+        <br />
+        <img src="images/gtd_demo.png" width="300px" class="img-thumbnail"/>
+    </div>
+
     <div class="col-md-9" ng-controller="TreeCtrl" ng-show="current_project.title" ng-init="node = {id: null}"
          id="project" style="background-color: #FFFFFF">
         <div class="row">
@@ -119,7 +126,9 @@
                 </div>
             </div>
 
-            <div ng-include="'tree_item_renderer.html'" style="padding-bottom: 200px"></div>
+            <div ng-include="'tree_item_renderer.html'" style="padding-bottom: 200px">
+
+            </div>
         </div>
     </div>
 
