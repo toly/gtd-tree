@@ -132,6 +132,12 @@ angular.module('gtdTreeApp')
             Trees.save_project_tree($rootScope.current_project.id, $scope.nodes);
         };
 
+        $scope.node_input_unfocus = function(node) {
+            node.edit = false;
+            $scope.focus_id = null;
+            $scope.save_project();
+        };
+
         function build_indexes(){
             $scope.indexes = {};
 
