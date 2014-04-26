@@ -41,9 +41,11 @@
 
         <form ng-show="new_project_show" class="">
             <div class="form-group">
-                <input type="text" ng-model="new_project.title" class="form-control">
+                <input type="text" ng-model="new_project.title" class="form-control"
+                        placeholder="Project title">
                 <br />
-                <textarea class="form-control" ng-model="new_project.description"></textarea>
+                <textarea class="form-control" ng-model="new_project.description"
+                        placeholder="Project description"></textarea>
             </div>
             <button class="btn btn-primary btn-block" ng-click="add_project()">Add</button>
         </form>
@@ -167,7 +169,7 @@
 
             <input type="text" class="" ng-model="node.name" ng-show="node.edit"
                    custom-autofocus="node.id == focus_id" ng-keypress="key_press_node_input($event, node)"
-                    ng-blur="node_input_unfocus(node)">
+                    ng-blur="node_input_unfocus(node)" placeholder="New task">
 
             <span ng-show="node.hover && node.id != null" class="right-controls">
                 <button class="btn btn-warning btn-sm"
