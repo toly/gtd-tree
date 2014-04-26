@@ -133,10 +133,12 @@
 
             <span ng-show="!is_pdf_rendering">
                 <button ng-click="node.hide_childs = true" ng-show="!node.hide_childs" class="btn btn-primary btn-sm"
-                        ng-class="{disabled: !get_childs(node.id).length}">
+                        ng-class="{disabled: !get_childs(node.id).length || node.id == null}">
                     <i class="glyphicon glyphicon-resize-small"></i>
                 </button>
-                <button ng-click="node.hide_childs = false" ng-show="node.hide_childs" class="btn btn-primary btn-sm">
+                <button ng-click="node.hide_childs = false"
+                        ng-show="node.hide_childs"
+                        class="btn btn-primary btn-sm">
                     <i class="glyphicon glyphicon-resize-full"></i>
                 </button>
 
