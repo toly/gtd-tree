@@ -40,6 +40,11 @@ angular.module('gtdTreeApp')
             $rootScope.current_project = Projects.get_project(project_id);
         };
 
+        $scope.blur_edit_input = function(project) {
+            project.edit = false;
+            Projects.update_project_title(project.id, project.title);
+        };
+
         $scope.input_keypress = function(event, project) {
             if (event.keyCode == 13) {
                 project.edit = false;

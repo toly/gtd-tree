@@ -15,7 +15,8 @@
                     <input type="text" ng-show="project.edit"
                            ng-model="project.title"
                            ng-keypress="input_keypress($event, project)"
-                           custom-autofocus="project.edit == true">
+                           custom-autofocus="project.edit == true"
+                           ng-blur="blur_edit_input(project)">
 
                     <span class="pull-right" ng-show="show_delete_icon">
                         <button class="btn btn-success btn-xs"
@@ -54,7 +55,6 @@
         <div class="row">
             <h3 class="col-md-6">
                 {{ current_project.title }}
-
             </h3>
         </div>
 
